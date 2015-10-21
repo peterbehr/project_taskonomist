@@ -1,0 +1,225 @@
+@import '_globals'
+
+// usually in Bootstrap
+*,
+*:before,
+*:after
+    -webkit-box-sizing border-box
+    -moz-box-sizing border-box
+    box-sizing border-box
+
+html,
+body
+    background _color_gray_95
+    color _color_gray_30
+    font-family 'Arial', serif
+    font-size 16px
+    font-weight 400
+    line-height _size_baseline_height
+    text-rendering optimizeLegibility
+    letter-spacing 0.005em
+
+ul,
+ol
+    margin 0
+    padding 0
+    list-style-type none
+
+p
+    line-height _size_baseline_height
+    margin 0 0 _size_baseline_height 0
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+    font-family 'Georgia', serif
+    font-weight 200
+    margin-top 0
+    margin-bottom _size_baseline_height
+
+// sets gutter between columns to 20px
+// TODO PB might want it to be 30px
+_size_grid_gutter = 20px
+
+.cleared
+    *zoom 1 // IE6/7 only
+    &:before,
+    &:after
+        content ' '
+        display table
+    &:after
+        clear both
+
+// generator for all twelve column widths
+column_i()
+    _this_columns = 12
+    for _i in (1.._this_columns)
+        .column_{_i}
+            float left
+            width (_i/_this_columns)*100%
+            padding 0px (_size_grid_gutter/2)
+            margin 0 0 0 0
+            // TODO PB shift to no bottom margin, as columns are structural guides only
+
+// row container
+.row
+    @extend .cleared
+    // this negative margin also means rows are nestable inside columns
+    // it also means the inner (non_padding) box of every column is flush with boundary of the container the rows are in
+    margin-left (-1*0.5*_size_grid_gutter)
+    margin-right (-1*0.5*_size_grid_gutter)
+    margin-top 0
+    margin-bottom 0
+    // no bottom margin, as rows are structural guides only
+    line-height 1.3
+    column_i()
+    // sometimes, however, we want the outer (including padding) box of a column (with a colored background, for example) to be flush with that boundary, without having to redundantly nest a column in a column, for that, add this class
+    &.inside
+        margin-left 0
+        margin-right 0
+
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=submit],
+select,
+textarea
+    border-radius 0
+    border 1px solid _color_gray_80
+    line-height _size_buttons_height
+    color inherit
+    font-family inherit
+    font-size inherit
+    background _color_white
+    padding 0 0.5em
+    // height _size_buttons_height
+    &[disabled]
+        background _color_gray_70
+
+textarea
+    padding 8px 12px
+    line-height inherit
+    resize none
+
+input[type=submit],
+input[type=button],
+button
+    border-radius 0
+    border 1px solid _color_buttons_background
+    font-size inherit
+    font-family inherit
+    font-weight 400
+    // text-transform uppercase
+    text-align center
+    color #fff
+    line-height _size_buttons_height
+    // height _size_buttons_height
+    padding 0 0.5em
+    display inline-block
+    cursor pointer
+    background _color_buttons_background
+    &:hover
+        background _color_buttons_background_hover
+        border 1px solid _color_buttons_background_hover
+    &:focus
+        box-shadow 0px 0px 8px _color_buttons_background_focus;
+    &.full_width
+        width 100%
+
+button[disabled],
+input[type=button][disabled]
+    background-color _color_gray_50 !important
+    cursor default !important
+
+#content
+    padding (_size_navigation_heigh+_size_baseline_height) 0 0 0;
+    margin 0 auto
+    width _size_content_width
+
+.masthead
+    background rgb(227, 18, 11)
+    color white
+    padding 0.2em 0.5em
+    display inline-block
+
+.touchpoints
+    padding 1em 0
+    font-size 20px
+    input
+        display inline-block
+    .control
+        width 100%
+    .centered
+        text-align center
+        line-height _size_buttons_height
+
+_color_tags_background = transparent
+_color_tags_border = _color_gray_50
+_color_tags_color = _color_gray_30
+_color_border = _color_gray_70
+
+.tasks
+    .task
+        &.template
+            display none
+        padding 0 0 1em 0
+        &.complete
+            opacity 0.3
+            input
+                text-decoration line-through
+            button.complete
+                background _color_green_light !important
+                border-color _color_green_light !important
+            .text-label
+                text-decoration line-through
+        .separator
+            .dummy
+                background _color_border
+                height 1px
+                margin 0 0 1em 0
+        .description
+            font-family 'Georgia', serif
+            font-weight 200
+            font-size 20px
+            margin-bottom 0.5em
+            width 100%
+            display block
+            padding 0
+            border 0
+            background transparent
+        .tags
+            color _color_tags_color
+            background transparent
+            border 0
+            width 100%
+            padding 0
+            line-height _size_buttons_height
+            min-height _size_buttons_height
+            height auto
+            .legend
+                display inline-block
+                margin-right 0.25em
+            .tag
+                display inline-block
+                padding 0 0.25em
+                margin-right 0.25em
+                line-height 1.25em
+                background _color_tags_background
+                border 1px solid _color_tags_border
+        .controls
+            .control
+                display block
+                width 100%
+                margin-bottom 0.5em
+            .delete
+                margin-bottom 0
+
+.stats
+    p
+        border-top 2px solid _color_gray_60
+        background _color_gray_85
+        padding 1em 1em
+        height: 6em;

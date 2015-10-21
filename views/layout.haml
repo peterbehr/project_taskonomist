@@ -1,0 +1,41 @@
+!!! 5
+-# it's ridic, but this implementation of Haml MUST have two-space indents
+%html
+  %head
+    %link{"rel": "stylesheet", "href": "stylesheets/reset.css", "type": "text/css"}
+    %link{"rel": "stylesheet", "href": "stylesheets/base.css", "type": "text/css"}
+    %link{"rel": "stylesheet", "href": "stylesheets/x.jquery.textext.core.css", "type": "text/css"}
+    %link{"rel": "stylesheet", "href": "stylesheets/x.jquery.textext.plugin.tags.css", "type": "text/css"}
+  %body
+    #content
+      .row
+        %h1.column_12
+          %span.masthead Taskonomist
+      .row.touchpoints
+        .column_8
+          %input.control.search{"name": "search", "type": "text", "placeholder": "Filter tasks by description or tags", "autocomplete": "off"}
+        .column_1.centered or
+        .column_3
+          %button.control.add Add new task
+      .row.empty
+        .column_12
+          %p.centered No tasks matching query
+      .row.tasks
+        .task.template.column_12
+          .row.inside
+            .column_12.separator
+              .dummy
+            .content.column_10
+              %input.description{"name": "description", "type": "text", "placeholder": "Click to add description"}
+              %textarea.tags{"name": "tags", "placeholder": "Click to add tags, 'enter' after each (optional)", "rows": "1"}
+              %input{"type": "hidden", "name": "id"}
+            .controls.column_2
+              %button.control.complete Complete
+              %button.control.delete Delete
+      .row.stats
+        .column_12
+          %p
+    %script{"type": "text/javascript", "src": "scripts/x.jquery-1.11.2.min.js"}
+    %script{"type": "text/javascript", "src": "scripts/x.textext.core.js"}
+    %script{"type": "text/javascript", "src": "scripts/x.textext.plugin.tags.js"}
+    %script{"type": "text/javascript", "src": "scripts/base.js"}
